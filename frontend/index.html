@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Multi-Agent Hub for Gaming</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header-banner">
+            <div class="brand-title">
+                <div class="logo-icon">🎮</div>
+                <div>
+                    <h1>AI MULTI-AGENT HUB</h1>
+                    <p class="subtitle">Autonomous Gaming Content Processing Pipeline</p>
+                </div>
+            </div>
+            <div class="server-status" id="server-status">
+                <span class="status-dot offline" id="status-dot"></span>
+                <span id="status-text">Checking Backend...</span>
+            </div>
+        </header>
+
+        <!-- Active Job ID Card -->
+        <section class="card job-card">
+            <div class="job-card-header">
+                <span class="job-label">ACTIVE JOB ID</span>
+                <span id="active-job-badge" class="badge badge-inactive">No Active Job</span>
+            </div>
+            <div class="job-card-body">
+                <div class="job-id-display" id="job-id-display">None</div>
+                <div class="job-actions">
+                    <button class="btn btn-secondary btn-sm" id="btn-copy-job" disabled>📋 Copy Job ID</button>
+                    <button class="btn btn-outline btn-sm" id="btn-reset-job">🔄 Reset</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid Layout: Left Column (Upload & Actions), Right Column (Status & Results) -->
+        <div class="main-grid">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <!-- Upload Card -->
+                <section class="card">
+                    <h2 class="card-title">1. Upload Gameplay Video</h2>
+                    <form id="upload-form" class="upload-form">
+                        <div class="drop-zone" id="drop-zone">
+                            <div class="drop-zone-icon">📁</div>
+                            <p class="drop-zone-text">Drag & drop your gaming video here, or <span class="highlight-text">browse</span></p>
+                            <span class="file-hint">Supports MP4, AVI, MOV, MKV</span>
+                            <input type="file" id="video-file-input" accept="video/mp4,video/avi,video/quicktime,video/x-matroska" hidden>
+                        </div>
+
+                        <div class="selected-file-info hidden" id="selected-file-info">
+                            <span class="file-name" id="file-name-text">video.mp4</span>
+                            <span class="file-size" id="file-size-text">0 MB</span>
+                            <button type="button" class="btn-clear" id="btn-clear-file">✕</button>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block glow-btn" id="btn-upload" disabled>
+                            🚀 UPLOAD VIDEO
+                        </button>
+                    </form>
+
+                    <!-- Upload Progress -->
+                    <div class="progress-container hidden" id="upload-progress-container">
+                        <div class="progress-header">
+                            <span>Uploading video...</span>
+                            <span id="upload-progress-text">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="upload-progress-bar"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Agent Action Control Panel -->
+                <section class="card">
+                    <h2 class="card-title">2. Agent Control Center</h2>
+                    <p class="card-subtitle">Trigger AI agents individually or orchestrate full pipeline</p>
+                    
+                    <div class="agent-buttons-grid">
+                        <button class="agent-btn" id="btn-agent-analyze" data-agent="analyze">
+                            <span class="agent-icon">📊</span>
+                            <div class="agent-info">
+                                <span class="agent-name">Analyze Agent</span>
+                                <span class="agent-desc">Extract FPS, resolution & metadata</span>
+                            </div>
+                        </button>
+
+                        <button class="agent-btn" id="btn-agent-highlight" data-agent="highlight">
+                            <span class="agent-icon">⚡</span>
+                            <div class="agent-info">
+                                <span class="agent-name">Highlight Agent</span>
+                                <span class="agent-desc">Detect high-motion gaming moments</span>
+                            </div>
+                        </button>
+
+                        <button class="agent-btn" id="btn-agent-seo" data-agent="seo">
+                            <span class="agent-icon">🚀</span>
+                            <div class="agent-info">
+                                <span class="agent-name">SEO Agent</span>
+                                <span class="agent-desc">Generate title, tags & description</span>
+                            </div>
+                        </button>
+
+                        <button class="agent-btn" id="btn-agent-thumbnail" data-agent="thumbnail">
+                            <span class="agent-icon">🖼️</span>
+                            <div class="agent-info">
+                                <span class="agent-name">Thumbnail Agent</span>
+                                <span class="agent-desc">Extract candidate preview frames</span>
+                            </div>
+                        </button>
+
+                        <button class="agent-btn" id="btn-agent-creator" data-agent="creator-brief">
+                            <span class="agent-icon">📋</span>
+                            <div class="agent-info">
+                                <span class="agent-name">Creator Brief Agent</span>
+                                <span class="agent-desc">Compile summary & publishing strategy</span>
+                            </div>
+                        </button>
+
+                        <button class="agent-btn agent-btn-featured" id="btn-agent-director" data-agent="director">
+                            <span class="agent-icon">🎬</span>
+                            <div class="agent-info">
+                                <span class="agent-name">Director Agent</span>
+                                <span class="agent-desc">Run complete processing pipeline</span>
+                            </div>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <!-- Status & Progress Section -->
+                <section class="card">
+                    <div class="card-header-flex">
+                        <h2 class="card-title">3. Pipeline Status</h2>
+                        <button class="btn btn-secondary btn-sm" id="btn-check-status">🔄 Check Status</button>
+                    </div>
+
+                    <div class="pipeline-progress-box">
+                        <div class="progress-info-flex">
+                            <span class="progress-label">Overall Completion</span>
+                            <span class="progress-percent" id="status-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill glowing-fill" id="status-progress-bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Steps Status Grid -->
+                    <div class="steps-grid">
+                        <div class="step-chip" id="step-upload">
+                            <span class="step-dot"></span>
+                            <span class="step-name">Upload</span>
+                        </div>
+                        <div class="step-chip" id="step-analysis">
+                            <span class="step-dot"></span>
+                            <span class="step-name">Analysis</span>
+                        </div>
+                        <div class="step-chip" id="step-highlights">
+                            <span class="step-dot"></span>
+                            <span class="step-name">Highlights</span>
+                        </div>
+                        <div class="step-chip" id="step-seo">
+                            <span class="step-dot"></span>
+                            <span class="step-name">SEO</span>
+                        </div>
+                        <div class="step-chip" id="step-thumbnails">
+                            <span class="step-dot"></span>
+                            <span class="step-name">Thumbnails</span>
+                        </div>
+                        <div class="step-chip" id="step-creator_brief">
+                            <span class="step-dot"></span>
+                            <span class="step-name">Creator Brief</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Viewer Card -->
+                <section class="card results-card">
+                    <div class="card-header-flex">
+                        <h2 class="card-title">4. Pipeline Results</h2>
+                        <button class="btn btn-secondary btn-sm" id="btn-fetch-results">📥 Fetch All Results</button>
+                    </div>
+
+                    <!-- Tabs Header -->
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="tab-brief">📋 Creator Brief</button>
+                        <button class="tab-btn" data-tab="tab-analysis">📊 Analysis</button>
+                        <button class="tab-btn" data-tab="tab-highlights">⚡ Highlights</button>
+                        <button class="tab-btn" data-tab="tab-seo">🚀 SEO</button>
+                        <button class="tab-btn" data-tab="tab-thumbnails">🖼️ Thumbnails</button>
+                        <button class="tab-btn" data-tab="tab-raw">🔍 Raw JSON</button>
+                    </div>
+
+                    <!-- Tabs Content Container -->
+                    <div class="tabs-body">
+                        <!-- Creator Brief Tab -->
+                        <div class="tab-pane active" id="tab-brief">
+                            <div class="empty-state" id="brief-empty">No creator brief generated yet. Run Creator Brief Agent or Fetch Results.</div>
+                            <div class="brief-content hidden" id="brief-content">
+                                <div class="brief-summary-box">
+                                    <h3>Executive Brief Summary</h3>
+                                    <pre id="brief-summary-text"></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Tab -->
+                        <div class="tab-pane" id="tab-analysis">
+                            <div class="empty-state" id="analysis-empty">No video analysis available. Run Analyze Agent.</div>
+                            <div class="metrics-grid hidden" id="analysis-content">
+                                <div class="metric-card">
+                                    <span class="metric-label">Duration</span>
+                                    <span class="metric-value" id="val-duration">-</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Resolution</span>
+                                    <span class="metric-value" id="val-resolution">-</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">FPS</span>
+                                    <span class="metric-value" id="val-fps">-</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Frame Count</span>
+                                    <span class="metric-value" id="val-frames">-</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Format</span>
+                                    <span class="metric-value" id="val-format">-</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">File Size</span>
+                                    <span class="metric-value" id="val-size">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Highlights Tab -->
+                        <div class="tab-pane" id="tab-highlights">
+                            <div class="empty-state" id="highlights-empty">No highlights detected. Run Highlight Agent.</div>
+                            <div class="highlights-list hidden" id="highlights-content"></div>
+                        </div>
+
+                        <!-- SEO Tab -->
+                        <div class="tab-pane" id="tab-seo">
+                            <div class="empty-state" id="seo-empty">No SEO content generated. Run SEO Agent.</div>
+                            <div class="seo-container hidden" id="seo-content">
+                                <div class="seo-field-group">
+                                    <div class="field-header">
+                                        <label>SEO Title</label>
+                                        <button class="btn-copy-small" id="copy-title-btn">Copy</button>
+                                    </div>
+                                    <div class="seo-box" id="seo-title-text"></div>
+                                </div>
+
+                                <div class="seo-field-group">
+                                    <div class="field-header">
+                                        <label>Description</label>
+                                        <button class="btn-copy-small" id="copy-desc-btn">Copy</button>
+                                    </div>
+                                    <pre class="seo-box description-box" id="seo-desc-text"></pre>
+                                </div>
+
+                                <div class="seo-field-group">
+                                    <label>Tags</label>
+                                    <div class="pills-container" id="seo-tags-pills"></div>
+                                </div>
+
+                                <div class="seo-field-group">
+                                    <label>Hashtags</label>
+                                    <div class="pills-container" id="seo-hashtags-pills"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thumbnails Tab -->
+                        <div class="tab-pane" id="tab-thumbnails">
+                            <div class="empty-state" id="thumbnails-empty">No thumbnails extracted. Run Thumbnail Agent.</div>
+                            <div class="thumbnails-grid hidden" id="thumbnails-content"></div>
+                        </div>
+
+                        <!-- Raw JSON Tab -->
+                        <div class="tab-pane" id="tab-raw">
+                            <div class="json-header-flex">
+                                <span>Raw API Response Inspection</span>
+                                <button class="btn btn-secondary btn-sm" id="btn-copy-json">Copy JSON</button>
+                            </div>
+                            <pre class="json-box" id="raw-json-box">{}</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+</body>
+</html>

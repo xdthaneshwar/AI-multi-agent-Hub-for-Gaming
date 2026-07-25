@@ -1,0 +1,34 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "image_path": "uploads/thumbnails/dcaaf7a4-c47a-492f-89ae-7ea1e5e6ba44/thumbnail_1.jpg",
+        "quality_score": 82.9,
+        "selection_reason": [
+            "Excellent sharpness",
+            "Strong colour contrast",
+            "Vibrant color palette",
+            "High detail"
+        ]
+    },
+    {
+        "timestamp": "00:00:11",
+        "image_path": "uploads/thumbnails/dcaaf7a4-c47a-492f-89ae-7ea1e5e6ba44/thumbnail_2.jpg",
+        "quality_score": 79.2,
+        "selection_reason": [
+            "Excellent sharpness",
+            "Strong colour contrast",
+            "Vibrant color palette"
+        ]
+    },
+    {
+        "timestamp": "00:00:15",
+        "image_path": "uploads/thumbnails/dcaaf7a4-c47a-492f-89ae-7ea1e5e6ba44/thumbnail_3.jpg",
+        "quality_score": 80.7,
+        "selection_reason": [
+            "Excellent sharpness",
+            "Strong colour contrast",
+            "Vibrant color palette",
+            "High detail"
+        ]
+    }
+]

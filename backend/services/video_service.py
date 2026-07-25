@@ -1,8 +1,8 @@
-import json
 from pathlib import Path
 from agents.analyze_agent import AnalyzeAgent
-from backend.config import UPLOAD_DIR, RESULTS_DIR
+from backend.config import UPLOAD_DIR
 from backend.services.job_service import JobService
+from backend.services.result_storage_service import ResultStorageService
 
 class VideoService:
     """
@@ -13,6 +13,7 @@ class VideoService:
     def __init__(self):
         self.analyze_agent = AnalyzeAgent()
         self.job_service = JobService()
+        self.storage_service = ResultStorageService()
 
     def analyze_video_file(self, filename: str) -> dict:
         """
@@ -38,7 +39,7 @@ class VideoService:
     def get_analysis_metadata(self, job_id: str) -> dict:
         """
         Retrieves video analysis metadata. Reuses cached results if they exist,
-        otherwise calculates and caches them.
+        otherwise calculates and caches them using ResultStorageService.
 
         Args:
             job_id (str): The unique identifier of the job.
@@ -47,14 +48,11 @@ class VideoService:
             dict: Extracted video metadata dictionary.
         """
         resolved_job_id = self.job_service.resolve_job_id(job_id)
-        safe_job_id = Path(resolved_job_id).name
-        analysis_file = RESULTS_DIR / safe_job_id / "analysis.json"
 
         # Check if pre-calculated analysis exists to return instantly
-        if analysis_file.exists():
+        if self.storage_service.result_exists(resolved_job_id, "analysis.json"):
             try:
-                with open(analysis_file, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                return self.storage_service.load_result(resolved_job_id, "analysis.json")
             except Exception:
                 pass  # Fallback to recalculation if JSON is corrupt
 
@@ -64,9 +62,7 @@ class VideoService:
         # Execute analysis pipeline using analyze_video_file
         analysis_data = self.analyze_video_file(filename)
         
-        # Cache the newly calculated analysis data for future uses
-        analysis_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(analysis_file, "w", encoding="utf-8") as f:
-            json.dump(analysis_data, f, indent=4)
+        # Cache the newly calculated analysis data using ResultStorageService
+        self.storage_service.save_result(resolved_job_id, "analysis.json", analysis_data)
 
         return analysis_data

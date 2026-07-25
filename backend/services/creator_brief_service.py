@@ -1,11 +1,9 @@
-import json
-from pathlib import Path
-from backend.config import RESULTS_DIR
 from backend.services.job_service import JobService
 from backend.services.video_service import VideoService
 from backend.services.highlight_service import HighlightService
 from backend.services.seo_service import SEOService
 from backend.services.thumbnail_service import ThumbnailService
+from backend.services.result_storage_service import ResultStorageService
 from backend.agents.creator_brief_agent import CreatorBriefAgent
 
 class CreatorBriefService:
@@ -21,13 +19,12 @@ class CreatorBriefService:
         self.seo_service = SEOService()
         self.thumbnail_service = ThumbnailService()
         self.creator_brief_agent = CreatorBriefAgent()
+        self.storage_service = ResultStorageService()
 
     def get_creator_brief(self, job_id: str) -> dict:
         """
         Gathers analysis, highlights, SEO, and thumbnails for a job ID,
-        and generates (or loads cached) creator brief data.
-
-        The job_id passed here is assumed to be resolved by the controller layer.
+        and generates (or loads cached) creator brief data using ResultStorageService.
 
         Args:
             job_id (str): Resolved unique job identifier.
@@ -35,15 +32,10 @@ class CreatorBriefService:
         Returns:
             dict: The structured creator brief dictionary.
         """
-        safe_job_id = Path(job_id).name
-        job_results_dir = RESULTS_DIR / safe_job_id
-        brief_cache_file = job_results_dir / "creator_brief.json"
-
-        # 1. Return pre-calculated creator brief if available in cache
-        if brief_cache_file.exists():
+        # 1. Return pre-calculated creator brief if available in cache via ResultStorageService
+        if self.storage_service.result_exists(job_id, "creator_brief.json"):
             try:
-                with open(brief_cache_file, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                return self.storage_service.load_result(job_id, "creator_brief.json")
             except Exception:
                 pass  # Fallback to regeneration if file is corrupt
 
@@ -61,9 +53,7 @@ class CreatorBriefService:
             thumbnails=thumbnails_data
         )
 
-        # 4. Cache creator brief results
-        job_results_dir.mkdir(parents=True, exist_ok=True)
-        with open(brief_cache_file, "w", encoding="utf-8") as f:
-            json.dump(creator_brief, f, indent=4)
+        # 4. Cache creator brief results via ResultStorageService
+        self.storage_service.save_result(job_id, "creator_brief.json", creator_brief)
 
         return creator_brief

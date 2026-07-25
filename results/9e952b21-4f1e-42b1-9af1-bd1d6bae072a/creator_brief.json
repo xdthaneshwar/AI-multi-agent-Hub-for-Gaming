@@ -1,0 +1,69 @@
+{
+    "summary": "Video Summary:\n- Total Duration: 16.77 seconds\n- Key Highlights Detected: 2 action moments\n- Preview Thumbnails Generated: 3 candidate frames\n\nPublishing Strategy:\nOptimal for short-form video platforms (YouTube Shorts, TikTok, Instagram Reels). Leverage energetic visual thumbnails and brief high-paced clips for maximum engagement.",
+    "video_analysis": {
+        "duration": 16.77,
+        "fps": 30.0,
+        "frame_count": 503,
+        "width": 480,
+        "height": 854,
+        "resolution": "480x854",
+        "file_size": 1289598,
+        "video_format": ".mp4"
+    },
+    "seo": {
+        "title": "One Of The Creepiest Doorbell Camera Videos On The Internet! #shorts",
+        "description": "Watch this amazing gameplay video: One Of The Creepiest Doorbell Camera Videos On The Internet!!\n\n\ud83c\udfa5 Video Specifications:\n- Resolution: 480x854\n- FPS: 30.0\n- Duration: 16.77 seconds\n\nIf you enjoyed the video, make sure to drop a like and subscribe for more action-packed gaming moments!",
+        "tags": [
+            "doorbell",
+            "internet!",
+            "shorts",
+            "gaming",
+            "highlights",
+            "shorts feed",
+            "gameplay",
+            "youtube shorts",
+            "camera",
+            "gaming hub",
+            "creepiest",
+            "videos",
+            "gamer"
+        ],
+        "hashtags": [
+            "#gaming",
+            "#gamer",
+            "#gameplay",
+            "#viral",
+            "#shorts",
+            "#shortsvideo",
+            "#shortsfeed"
+        ]
+    },
+    "highlights": [
+        {
+            "timestamp": "00:00:00",
+            "time_seconds": 0.03,
+            "frame_index": 1,
+            "motion_intensity": 17.13
+        },
+        {
+            "timestamp": "00:00:11",
+            "time_seconds": 11.67,
+            "frame_index": 350,
+            "motion_intensity": 12.07
+        }
+    ],
+    "thumbnails": [
+        {
+            "timestamp": "00:00:00",
+            "image_path": "uploads/thumbnails/9e952b21-4f1e-42b1-9af1-bd1d6bae072a/thumbnail_1.jpg"
+        },
+        {
+            "timestamp": "00:00:11",
+            "image_path": "uploads/thumbnails/9e952b21-4f1e-42b1-9af1-bd1d6bae072a/thumbnail_2.jpg"
+        },
+        {
+            "timestamp": "00:00:08",
+            "image_path": "uploads/thumbnails/9e952b21-4f1e-42b1-9af1-bd1d6bae072a/thumbnail_3.jpg"
+        }
+    ]
+}

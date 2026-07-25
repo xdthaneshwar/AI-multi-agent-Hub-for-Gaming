@@ -1,0 +1,17 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "image_path": "uploads/thumbnails/ba443b52-8807-419b-9ea6-5aaf47e4f403/thumbnail_1.jpg",
+        "quality_score": 35.4
+    },
+    {
+        "timestamp": "00:00:20",
+        "image_path": "uploads/thumbnails/ba443b52-8807-419b-9ea6-5aaf47e4f403/thumbnail_2.jpg",
+        "quality_score": 50.6
+    },
+    {
+        "timestamp": "00:00:04",
+        "image_path": "uploads/thumbnails/ba443b52-8807-419b-9ea6-5aaf47e4f403/thumbnail_3.jpg",
+        "quality_score": 43.5
+    }
+]

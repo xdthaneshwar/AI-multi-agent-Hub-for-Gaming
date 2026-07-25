@@ -1,0 +1,236 @@
+[
+    {
+        "timestamp": "00:00:04",
+        "time_seconds": 4.73,
+        "frame_index": 142,
+        "motion_intensity": 93.29
+    },
+    {
+        "timestamp": "00:00:09",
+        "time_seconds": 9.13,
+        "frame_index": 274,
+        "motion_intensity": 68.8
+    },
+    {
+        "timestamp": "00:00:12",
+        "time_seconds": 12.53,
+        "frame_index": 376,
+        "motion_intensity": 62.6
+    },
+    {
+        "timestamp": "00:00:15",
+        "time_seconds": 15.53,
+        "frame_index": 466,
+        "motion_intensity": 10.19
+    },
+    {
+        "timestamp": "00:00:21",
+        "time_seconds": 21.2,
+        "frame_index": 636,
+        "motion_intensity": 61.39
+    },
+    {
+        "timestamp": "00:00:25",
+        "time_seconds": 25.77,
+        "frame_index": 773,
+        "motion_intensity": 11.54
+    },
+    {
+        "timestamp": "00:01:36",
+        "time_seconds": 96.97,
+        "frame_index": 2909,
+        "motion_intensity": 13.42
+    },
+    {
+        "timestamp": "00:01:40",
+        "time_seconds": 100.5,
+        "frame_index": 3015,
+        "motion_intensity": 14.41
+    },
+    {
+        "timestamp": "00:01:47",
+        "time_seconds": 107.3,
+        "frame_index": 3219,
+        "motion_intensity": 12.14
+    },
+    {
+        "timestamp": "00:01:51",
+        "time_seconds": 111.13,
+        "frame_index": 3334,
+        "motion_intensity": 8.21
+    },
+    {
+        "timestamp": "00:01:55",
+        "time_seconds": 115.87,
+        "frame_index": 3476,
+        "motion_intensity": 23.2
+    },
+    {
+        "timestamp": "00:01:59",
+        "time_seconds": 119.8,
+        "frame_index": 3594,
+        "motion_intensity": 62.65
+    },
+    {
+        "timestamp": "00:02:03",
+        "time_seconds": 123.7,
+        "frame_index": 3711,
+        "motion_intensity": 8.39
+    },
+    {
+        "timestamp": "00:02:06",
+        "time_seconds": 126.77,
+        "frame_index": 3803,
+        "motion_intensity": 60.59
+    },
+    {
+        "timestamp": "00:02:10",
+        "time_seconds": 130.73,
+        "frame_index": 3922,
+        "motion_intensity": 57.14
+    },
+    {
+        "timestamp": "00:02:18",
+        "time_seconds": 138.67,
+        "frame_index": 4160,
+        "motion_intensity": 74.95
+    },
+    {
+        "timestamp": "00:02:23",
+        "time_seconds": 143.47,
+        "frame_index": 4304,
+        "motion_intensity": 23.78
+    },
+    {
+        "timestamp": "00:02:32",
+        "time_seconds": 152.7,
+        "frame_index": 4581,
+        "motion_intensity": 25.59
+    },
+    {
+        "timestamp": "00:02:39",
+        "time_seconds": 159.97,
+        "frame_index": 4799,
+        "motion_intensity": 8.27
+    },
+    {
+        "timestamp": "00:02:50",
+        "time_seconds": 170.27,
+        "frame_index": 5108,
+        "motion_intensity": 19.05
+    },
+    {
+        "timestamp": "00:02:56",
+        "time_seconds": 176.13,
+        "frame_index": 5284,
+        "motion_intensity": 20.91
+    },
+    {
+        "timestamp": "00:03:07",
+        "time_seconds": 187.53,
+        "frame_index": 5626,
+        "motion_intensity": 8.65
+    },
+    {
+        "timestamp": "00:03:12",
+        "time_seconds": 192.93,
+        "frame_index": 5788,
+        "motion_intensity": 17.54
+    },
+    {
+        "timestamp": "00:03:16",
+        "time_seconds": 196.4,
+        "frame_index": 5892,
+        "motion_intensity": 18.16
+    },
+    {
+        "timestamp": "00:03:19",
+        "time_seconds": 199.67,
+        "frame_index": 5990,
+        "motion_intensity": 65.96
+    },
+    {
+        "timestamp": "00:03:22",
+        "time_seconds": 202.7,
+        "frame_index": 6081,
+        "motion_intensity": 45.9
+    },
+    {
+        "timestamp": "00:03:25",
+        "time_seconds": 205.83,
+        "frame_index": 6175,
+        "motion_intensity": 68.41
+    },
+    {
+        "timestamp": "00:03:34",
+        "time_seconds": 214.27,
+        "frame_index": 6428,
+        "motion_intensity": 29.16
+    },
+    {
+        "timestamp": "00:03:37",
+        "time_seconds": 217.43,
+        "frame_index": 6523,
+        "motion_intensity": 35.06
+    },
+    {
+        "timestamp": "00:03:41",
+        "time_seconds": 221.57,
+        "frame_index": 6647,
+        "motion_intensity": 11.77
+    },
+    {
+        "timestamp": "00:03:45",
+        "time_seconds": 225.43,
+        "frame_index": 6763,
+        "motion_intensity": 10.18
+    },
+    {
+        "timestamp": "00:03:50",
+        "time_seconds": 230.83,
+        "frame_index": 6925,
+        "motion_intensity": 33.63
+    },
+    {
+        "timestamp": "00:04:07",
+        "time_seconds": 247.0,
+        "frame_index": 7410,
+        "motion_intensity": 36.84
+    },
+    {
+        "timestamp": "00:04:24",
+        "time_seconds": 264.57,
+        "frame_index": 7937,
+        "motion_intensity": 81.08
+    },
+    {
+        "timestamp": "00:04:31",
+        "time_seconds": 271.87,
+        "frame_index": 8156,
+        "motion_intensity": 94.19
+    },
+    {
+        "timestamp": "00:04:34",
+        "time_seconds": 274.9,
+        "frame_index": 8247,
+        "motion_intensity": 13.58
+    },
+    {
+        "timestamp": "00:04:40",
+        "time_seconds": 280.4,
+        "frame_index": 8412,
+        "motion_intensity": 96.42
+    },
+    {
+        "timestamp": "00:04:43",
+        "time_seconds": 283.43,
+        "frame_index": 8503,
+        "motion_intensity": 11.88
+    },
+    {
+        "timestamp": "00:04:47",
+        "time_seconds": 287.17,
+        "frame_index": 8615,
+        "motion_intensity": 25.44
+    }
+]

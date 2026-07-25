@@ -1,0 +1,109 @@
+{
+    "summary": "Video Summary:\n- Total Duration: 35.69 seconds\n- Key Highlights Detected: 8 action moments\n- Preview Thumbnails Generated: 3 candidate frames\n\nPublishing Strategy:\nOptimal for short-form video platforms (YouTube Shorts, TikTok, Instagram Reels). Leverage energetic visual thumbnails and brief high-paced clips for maximum engagement.",
+    "video_analysis": {
+        "duration": 35.69,
+        "fps": 29.97,
+        "frame_count": 1068,
+        "width": 854,
+        "height": 480,
+        "resolution": "854x480",
+        "file_size": 4466243,
+        "video_format": ".mp4"
+    },
+    "seo": {
+        "title": "\ud835\udcd5\ud835\udcfe\ud835\udcec\ud835\udcf4 \ud835\udcf5\ud835\udcf8\ud835\udcff\ud835\udcee \ud83d\udc98 L Montage For Lawnada\u26a1L Need A Free Fortnite Montage Highlights Editor 480P #shorts",
+        "description": "Watch this amazing gameplay video: \ud835\udcd5\ud835\udcfe\ud835\udcec\ud835\udcf4 \ud835\udcf5\ud835\udcf8\ud835\udcff\ud835\udcee \ud83d\udc98 L Montage For Lawnada\u26a1L Need A Free Fortnite Montage Highlights Editor 480P!\n\n\ud83c\udfa5 Video Specifications:\n- Resolution: 854x480\n- FPS: 29.97\n- Duration: 35.69 seconds\n\nIf you enjoyed the video, make sure to drop a like and subscribe for more action-packed gaming moments!",
+        "tags": [
+            "free",
+            "\ud835\udcd5\ud835\udcfe\ud835\udcec\ud835\udcf4",
+            "\ud835\udcf5\ud835\udcf8\ud835\udcff\ud835\udcee",
+            "shorts",
+            "gaming",
+            "480p",
+            "highlights",
+            "shorts feed",
+            "gameplay",
+            "youtube shorts",
+            "need",
+            "gaming hub",
+            "editor",
+            "montage",
+            "lawnada\u26a1l",
+            "gamer",
+            "fortnite"
+        ],
+        "hashtags": [
+            "#gaming",
+            "#gamer",
+            "#gameplay",
+            "#viral",
+            "#shorts",
+            "#shortsvideo",
+            "#shortsfeed"
+        ]
+    },
+    "highlights": [
+        {
+            "timestamp": "00:00:00",
+            "time_seconds": 0.87,
+            "frame_index": 26,
+            "motion_intensity": 100.0
+        },
+        {
+            "timestamp": "00:00:04",
+            "time_seconds": 4.5,
+            "frame_index": 135,
+            "motion_intensity": 91.71
+        },
+        {
+            "timestamp": "00:00:07",
+            "time_seconds": 7.51,
+            "frame_index": 225,
+            "motion_intensity": 25.8
+        },
+        {
+            "timestamp": "00:00:10",
+            "time_seconds": 10.51,
+            "frame_index": 315,
+            "motion_intensity": 9.53
+        },
+        {
+            "timestamp": "00:00:14",
+            "time_seconds": 14.15,
+            "frame_index": 424,
+            "motion_intensity": 8.28
+        },
+        {
+            "timestamp": "00:00:17",
+            "time_seconds": 17.18,
+            "frame_index": 515,
+            "motion_intensity": 11.71
+        },
+        {
+            "timestamp": "00:00:20",
+            "time_seconds": 20.95,
+            "frame_index": 628,
+            "motion_intensity": 100.0
+        },
+        {
+            "timestamp": "00:00:24",
+            "time_seconds": 24.39,
+            "frame_index": 731,
+            "motion_intensity": 8.33
+        }
+    ],
+    "thumbnails": [
+        {
+            "timestamp": "00:00:00",
+            "image_path": "uploads/thumbnails/ba443b52-8807-419b-9ea6-5aaf47e4f403/thumbnail_1.jpg"
+        },
+        {
+            "timestamp": "00:00:20",
+            "image_path": "uploads/thumbnails/ba443b52-8807-419b-9ea6-5aaf47e4f403/thumbnail_2.jpg"
+        },
+        {
+            "timestamp": "00:00:04",
+            "image_path": "uploads/thumbnails/ba443b52-8807-419b-9ea6-5aaf47e4f403/thumbnail_3.jpg"
+        }
+    ]
+}

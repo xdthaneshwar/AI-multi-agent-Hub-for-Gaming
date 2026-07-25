@@ -1,12 +1,15 @@
-import json
 from pathlib import Path
 from backend.config import RESULTS_DIR
+from backend.services.result_storage_service import ResultStorageService
 
 class JobService:
     """
     JobService handles retrieving, creating, and processing metadata stored 
     in the results directory. It serves as the single source of truth for job lifecycle records.
     """
+
+    def __init__(self):
+        self.storage_service = ResultStorageService()
 
     def create_job_metadata(self, job_id: str, original_filename: str, saved_filename: str) -> None:
         """
@@ -17,20 +20,12 @@ class JobService:
             original_filename (str): The user's original uploaded filename.
             saved_filename (str): The unique filename stored on the disk.
         """
-        # Sanitize job_id to prevent directory traversal
-        safe_job_id = Path(job_id).name
-        job_results_dir = RESULTS_DIR / safe_job_id
-        job_results_dir.mkdir(parents=True, exist_ok=True)
-
         upload_metadata = {
             "job_id": job_id,
             "original_filename": original_filename,
             "saved_filename": saved_filename
         }
-
-        metadata_file_path = job_results_dir / "upload.json"
-        with open(metadata_file_path, "w", encoding="utf-8") as f:
-            json.dump(upload_metadata, f, indent=4)
+        self.storage_service.save_result(job_id, "upload.json", upload_metadata)
 
     def get_latest_job_id(self) -> str:
         """
@@ -91,17 +86,10 @@ class JobService:
             FileNotFoundError: If the metadata file does not exist.
         """
         resolved_job_id = self.resolve_job_id(job_id)
-        safe_job_id = Path(resolved_job_id).name
-        metadata_file = RESULTS_DIR / safe_job_id / "upload.json"
+        if not self.storage_service.result_exists(resolved_job_id, "upload.json"):
+            raise FileNotFoundError(f"Job ID '{resolved_job_id}' does not exist or upload metadata is missing.")
 
-        if not metadata_file.exists():
-            raise FileNotFoundError(f"Job ID '{safe_job_id}' does not exist or upload metadata is missing.")
-
-        try:
-            with open(metadata_file, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except (json.JSONDecodeError, OSError) as e:
-            raise RuntimeError(f"Failed to read metadata for job '{safe_job_id}': {str(e)}")
+        return self.storage_service.load_result(resolved_job_id, "upload.json")
 
     def get_saved_filename(self, job_id: str) -> str:
         """
