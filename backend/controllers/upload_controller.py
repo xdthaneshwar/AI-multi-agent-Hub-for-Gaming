@@ -1,13 +1,8 @@
 import uuid
 import shutil
-from pathlib import Path
 from fastapi import UploadFile
+from backend.config import UPLOAD_DIR
 
-# Define the path to the 'uploads' directory at the project root using pathlib.Path
-# __file__ points to: backend/controllers/upload_controller.py
-# .resolve().parents[2] navigates 3 levels up to: AI-multi-agent-Hub-for-Gaming/
-BASE_DIR = Path(__file__).resolve().parents[2]
-UPLOAD_DIR = BASE_DIR / "uploads"
 
 def save_uploaded_video(file: UploadFile):
     """
