@@ -5,6 +5,7 @@ from backend.routes.highlight import router as highlight_router
 from backend.routes.director import router as director_router
 from backend.routes.seo import router as seo_router
 from backend.routes.thumbnail import router as thumbnail_router
+from backend.routes.creator_brief import router as creator_brief_router
 
 # Create the FastAPI application
 app = FastAPI()
@@ -16,6 +17,7 @@ app.include_router(highlight_router)
 app.include_router(director_router)
 app.include_router(seo_router)
 app.include_router(thumbnail_router)
+app.include_router(creator_brief_router)
 
 
 # Home route
