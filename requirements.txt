@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+python-multipart
+pydantic
+openai
+google-genai
+opencv-python
+moviepy
+ffmpeg-python
