@@ -11,3 +11,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 # Directory where uploaded files are stored
 UPLOAD_DIR = BASE_DIR / "uploads"
 
+# Directory where job results and metadata are stored
+RESULTS_DIR = BASE_DIR / "results"
+
+

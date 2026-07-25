@@ -1,8 +1,8 @@
 import uuid
 import shutil
+import json
 from fastapi import UploadFile
-from backend.config import UPLOAD_DIR
-
+from backend.config import UPLOAD_DIR, RESULTS_DIR
 
 def save_uploaded_video(file: UploadFile):
     """
@@ -27,11 +27,22 @@ def save_uploaded_video(file: UploadFile):
     file_path = UPLOAD_DIR / saved_filename
 
     # Save the file stream to the target location
-    # Note: We use synchronous file writing here because disk write operations are blocking.
-    # FastAPI handles regular synchronous 'def' endpoints/functions in an external thread pool
-    # so it does not block the main asynchronous event loop.
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
+
+    # Save the upload details inside results/<job_id>/upload.json
+    job_results_dir = RESULTS_DIR / job_id
+    job_results_dir.mkdir(parents=True, exist_ok=True)
+
+    upload_metadata = {
+        "job_id": job_id,
+        "original_filename": original_filename,
+        "saved_filename": saved_filename
+    }
+
+    metadata_file_path = job_results_dir / "upload.json"
+    with open(metadata_file_path, "w", encoding="utf-8") as f:
+        json.dump(upload_metadata, f, indent=4)
 
     return {
         "success": True,
