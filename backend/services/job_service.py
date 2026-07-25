@@ -77,6 +77,32 @@ class JobService:
                 raise FileNotFoundError("No uploaded videos found in the system.")
         return job_id
 
+    def get_job_metadata(self, job_id: str) -> dict:
+        """
+        Retrieves the complete upload metadata dictionary from results/<job_id>/upload.json.
+
+        Args:
+            job_id (str): The unique identifier of the job.
+
+        Returns:
+            dict: The metadata dictionary.
+
+        Raises:
+            FileNotFoundError: If the metadata file does not exist.
+        """
+        resolved_job_id = self.resolve_job_id(job_id)
+        safe_job_id = Path(resolved_job_id).name
+        metadata_file = RESULTS_DIR / safe_job_id / "upload.json"
+
+        if not metadata_file.exists():
+            raise FileNotFoundError(f"Job ID '{safe_job_id}' does not exist or upload metadata is missing.")
+
+        try:
+            with open(metadata_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError) as e:
+            raise RuntimeError(f"Failed to read metadata for job '{safe_job_id}': {str(e)}")
+
     def get_saved_filename(self, job_id: str) -> str:
         """
         Reads the results/<job_id>/upload.json metadata file and extracts the saved filename.
@@ -86,28 +112,25 @@ class JobService:
 
         Returns:
             str: The saved video filename associated with the job.
-
-        Raises:
-            FileNotFoundError: If the job's upload metadata does not exist.
         """
-        # Resolve the job_id (handles placeholders and fallbacks)
-        resolved_job_id = self.resolve_job_id(job_id)
+        metadata = self.get_job_metadata(job_id)
+        saved_filename = metadata.get("saved_filename")
+        if not saved_filename:
+            raise KeyError("Field 'saved_filename' is missing in metadata.")
+        return saved_filename
 
-        # Sanitize job_id to prevent path traversal issues
-        safe_job_id = Path(resolved_job_id).name
-        metadata_file = RESULTS_DIR / safe_job_id / "upload.json"
+    def get_original_filename(self, job_id: str) -> str:
+        """
+        Reads the results/<job_id>/upload.json metadata file and extracts the original uploaded filename.
 
-        if not metadata_file.exists():
-            raise FileNotFoundError(f"Job ID '{safe_job_id}' does not exist or upload metadata is missing.")
+        Args:
+            job_id (str): The unique identifier of the job.
 
-        try:
-            with open(metadata_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                saved_filename = data.get("saved_filename")
-                if not saved_filename:
-                    raise KeyError("Field 'saved_filename' is missing in metadata.")
-                return saved_filename
-        except (json.JSONDecodeError, KeyError, OSError) as e:
-            raise RuntimeError(f"Failed to read metadata for job '{safe_job_id}': {str(e)}")
-        
-        return resolved_job_id
+        Returns:
+            str: The original filename.
+        """
+        metadata = self.get_job_metadata(job_id)
+        original_filename = metadata.get("original_filename")
+        if not original_filename:
+            raise KeyError("Field 'original_filename' is missing in metadata.")
+        return original_filename

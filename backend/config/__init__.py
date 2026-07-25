@@ -14,4 +14,8 @@ UPLOAD_DIR = BASE_DIR / "uploads"
 # Directory where job results and metadata are stored
 RESULTS_DIR = BASE_DIR / "results"
 
+# Directory where generated thumbnails are stored
+THUMBNAILS_DIR = UPLOAD_DIR / "thumbnails"
+
+
 
