@@ -4,8 +4,78 @@ from backend.config import RESULTS_DIR
 
 class JobService:
     """
-    JobService handles retrieving and processing metadata stored in the results directory.
+    JobService handles retrieving, creating, and processing metadata stored 
+    in the results directory. It serves as the single source of truth for job lifecycle records.
     """
+
+    def create_job_metadata(self, job_id: str, original_filename: str, saved_filename: str) -> None:
+        """
+        Creates a job directory and saves upload metadata to results/<job_id>/upload.json.
+
+        Args:
+            job_id (str): The unique identifier of the job.
+            original_filename (str): The user's original uploaded filename.
+            saved_filename (str): The unique filename stored on the disk.
+        """
+        # Sanitize job_id to prevent directory traversal
+        safe_job_id = Path(job_id).name
+        job_results_dir = RESULTS_DIR / safe_job_id
+        job_results_dir.mkdir(parents=True, exist_ok=True)
+
+        upload_metadata = {
+            "job_id": job_id,
+            "original_filename": original_filename,
+            "saved_filename": saved_filename
+        }
+
+        metadata_file_path = job_results_dir / "upload.json"
+        with open(metadata_file_path, "w", encoding="utf-8") as f:
+            json.dump(upload_metadata, f, indent=4)
+
+    def get_latest_job_id(self) -> str:
+        """
+        Scans the results directory and returns the job ID of the most recently uploaded video.
+
+        Returns:
+            str: The job ID of the latest upload.
+
+        Raises:
+            FileNotFoundError: If no uploaded jobs are found.
+        """
+        if not RESULTS_DIR.exists():
+            raise FileNotFoundError("No jobs have been uploaded yet.")
+
+        # Gather all subdirectories containing an upload.json file
+        job_dirs = [
+            d for d in RESULTS_DIR.iterdir()
+            if d.is_dir() and (d / "upload.json").exists()
+        ]
+
+        if not job_dirs:
+            raise FileNotFoundError("No jobs have been uploaded yet.")
+
+        # Sort directories by the modification time of upload.json (newest first)
+        job_dirs.sort(key=lambda d: (d / "upload.json").stat().st_mtime, reverse=True)
+        return job_dirs[0].name
+
+    def resolve_job_id(self, job_id: str) -> str:
+        """
+        Resolves a job_id input, checking for empty strings, FastAPI default "string",
+        or Swagger example values, falling back to the latest uploaded job_id.
+
+        Args:
+            job_id (str): The input job_id.
+
+        Returns:
+            str: The resolved, active job_id.
+        """
+        placeholders = {"409ef1e2-b13c-41fb-9cf9-980b6754bc11", "string", "", None}
+        if job_id in placeholders:
+            try:
+                return self.get_latest_job_id()
+            except FileNotFoundError:
+                raise FileNotFoundError("No uploaded videos found in the system.")
+        return job_id
 
     def get_saved_filename(self, job_id: str) -> str:
         """
@@ -20,8 +90,11 @@ class JobService:
         Raises:
             FileNotFoundError: If the job's upload metadata does not exist.
         """
+        # Resolve the job_id (handles placeholders and fallbacks)
+        resolved_job_id = self.resolve_job_id(job_id)
+
         # Sanitize job_id to prevent path traversal issues
-        safe_job_id = Path(job_id).name
+        safe_job_id = Path(resolved_job_id).name
         metadata_file = RESULTS_DIR / safe_job_id / "upload.json"
 
         if not metadata_file.exists():
@@ -36,3 +109,5 @@ class JobService:
                 return saved_filename
         except (json.JSONDecodeError, KeyError, OSError) as e:
             raise RuntimeError(f"Failed to read metadata for job '{safe_job_id}': {str(e)}")
+        
+        return resolved_job_id

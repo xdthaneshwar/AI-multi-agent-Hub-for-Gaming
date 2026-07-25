@@ -12,8 +12,8 @@ class AnalyzeRequest(BaseModel):
     """
     job_id: str = Field(
         ..., 
-        description="The unique job identifier returned by the upload API",
-        examples=["409ef1e2-b13c-41fb-9cf9-980b6754bc11"]
+        description="The unique job identifier returned by the upload API"
+        
     )
 
 @router.post("/analyze")

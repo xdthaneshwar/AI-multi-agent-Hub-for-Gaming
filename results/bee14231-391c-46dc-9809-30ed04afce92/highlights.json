@@ -1,0 +1,14 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "time_seconds": 0.03,
+        "frame_index": 1,
+        "motion_intensity": 17.13
+    },
+    {
+        "timestamp": "00:00:11",
+        "time_seconds": 11.67,
+        "frame_index": 350,
+        "motion_intensity": 12.07
+    }
+]
